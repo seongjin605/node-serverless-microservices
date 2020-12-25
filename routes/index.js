@@ -1,17 +1,6 @@
-const express = require('express');
-const router = express.Router();
+const app = require('express').Router({ mergeParams: true });
+const test = require('./api/test');
 
-/* GET home page. */
-router.get('/', (req, res, next) => {
-  res.render('index', { title: 'Express' });
-});
+app.use('/api/test', test);
 
-router.post('/api/test', (req, res) => {
-  res.send({
-    name: 'test',
-    email: 'test@amazon.com',
-    address: 'seoul'
-  });
-});
-
-module.exports = router;
+module.exports = app;

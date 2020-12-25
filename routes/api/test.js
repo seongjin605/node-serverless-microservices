@@ -1,11 +1,20 @@
-const router = require('express').Router({ mergeParams: true });
+const express = require('express');
+const router = express.Router();
 
-module.exports = (services, models) => {
-  console.log('🚀 ~ file: test.js ~ line 12 ~ models', models);
-  console.log('🚀 ~ file: test.js ~ line 12 ~ services', services);
-  router.post('/', (req, res, next) => {
-    res.status(200).send(['Jesus', 'I love to praise your name', 'My Story', 'Days of Elijah']);
-    console.log('next:', next);
-  });
-  return router;
-};
+// middleware that is specific to this router
+router.use(function timeLog(req, res, next) {
+  console.log('Time: ', Date.now());
+  next();
+});
+
+// define the home page route
+router.get('/', (req, res) => {
+  res.send({ method: 'GET', name: 'Lorem Ipsum' });
+});
+
+// define the about route
+router.post('/', (req, res) => {
+  res.send({ method: 'POST', name: 'Ívarr hinn Beinlausi' });
+});
+
+module.exports = router;
